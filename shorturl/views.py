@@ -5,6 +5,9 @@ from shorturl.models import UrlTable
 import hashlib
 # Create your views here.
 
+def home(request):
+    return render(request,"home.html")
+
 def createHash(key):
     hash = hashlib.md5(key)
     return hash.hexdigest()[:5]

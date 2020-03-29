@@ -19,6 +19,7 @@ from shorturl.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/',home),
     path('signup/',signup),
     path('signin/',signin),
     path('signout/',signout),
