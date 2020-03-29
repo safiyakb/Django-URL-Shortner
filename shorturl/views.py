@@ -7,7 +7,7 @@ import hashlib
 
 def createHash(key):
     hash = hashlib.md5(key)
-    return hash.hexdigest()
+    return hash.hexdigest()[:5]
 
 def signup(request):
 	if request.method == "POST":
@@ -33,7 +33,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user != None:
             login(request, user)
-            return redirect("/dashboard")
+            return redirect("/dashboard/")
     return render(request,"signin.html")
 
 def dashboard(request):
@@ -43,15 +43,16 @@ def dashboard(request):
 
 def create_short_url(request):
     if request.method == "POST":
-        long_url = request.POST.get("long_url")
         title = request.POST.get("title")
+        long_url = request.POST.get("long_url")
+        short_hash = createHash(long_url.encode())
         user = request.user
-        short_hash = createHash(long_url.encode.key)
+        
         url = UrlTable.objects.create(
+            title = title,
             long_url=long_url,
-            user = user,
             short_hash = short_hash,
-            title = title
+            user = user  
         )
         return redirect("/dashboard/")
 

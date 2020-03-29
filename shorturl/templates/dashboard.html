@@ -5,8 +5,8 @@
     <div class="row">
 
         <div class="col-md-8">
-            <h6>Links</h6>
-            {% for url in url_instances %}
+            <h5>Links</h5>
+            {% for url in url_instance %}
             <div>
                 <div class="card" style="width: 45rem;">
                     <div class="card-body">
@@ -14,11 +14,11 @@
                             <div>
                                 <h5 class="card-title">{{url.title}}</h5>
                                 <label style="margin-top:1px">No of clicks: &nbsp; {{url.no_clicks}}</label>
-                                <img src="https://image.flaticon.com/icons/svg/893/893214.svg" width="13px;" style="margin-bottom:6px;">
+                                
                             </div>
-                            <label style="margin-top:2px;  font-size: 14px; float: right;">http://127.0.0.1:8000/{{url.short_hash}}</label>
+                            <label style="margin-top:2px;  font-size: 14px; float: right;">{{url.short_hash}}</label>
                         </div>
-                        <p class="card-text">{{url.long_url|truncatechars:70}}</p>
+                        <p class="card-text">{{url.long_url}}</p>
                         <a href="{{url.long_url}}" class="btn btn-light" target="_blank">Vist Link</a>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
                 <h6>Create new URL</h6>
                 <input type="text" name="title" placeholder="Title" class="form-control">
                 <br>
-                <input type="text" class="form-control" placeholder="Paste Login URL" name="long_url">
+                <input type="text" class="form-control" placeholder="Paste Long URL" name="long_url">
                 <br>
-                <button type="submit" class="btn btn-warning btn-sm" style="color: white;">Shorten</button>
+                <button type="submit" class="btn btn-light btn-sm" >Shorten</button>
             </form>
         </div>
 
