@@ -1,32 +1,11 @@
-{% extends 'base.html' %} {% block dashboard %}
+{% extends 'base.html' %} 
+{% block dashboard %}
 
 <div class="container">
-    <br>
+    <br><br>
+    {% csrf_token %}
     <div class="row">
-
-        <div class="col-md-8">
-            <h5>Links</h5>
-            {% for url in url_instance %}
-            <div>
-                <div class="card" style="width: 45rem;">
-                    <div class="card-body">
-                        <div style="display: flex; justify-content: space-between;">
-                            <div>
-                                <h5 class="card-title">{{url.title}}</h5>
-                                <label style="margin-top:1px">No of clicks: &nbsp; {{url.no_clicks}}</label>
-                                
-                            </div>
-                            <label style="margin-top:2px;  font-size: 14px; float: right;">{{url.short_hash}}</label>
-                        </div>
-                        <p class="card-text">{{url.long_url}}</p>
-                        <a href="{{url.long_url}}" class="btn btn-light" target="_blank">Vist Link</a>
-                    </div>
-                </div>
-            </div>
-            <br> {% endfor %}
-        </div>
-
-        <div class="col-md-4" method="POST">
+        <div class="col-md-5" method="POST">
             <form action="/create_short_url/" method="POST">
                 {% csrf_token %}
                 <h6>Create new URL</h6>
@@ -37,6 +16,39 @@
                 <button type="submit" class="btn btn-light btn-sm" >Shorten</button>
             </form>
         </div>
+        <br>
+        <br>
+
+        <div class="col-md-8">
+            <h5>Links</h5>
+            {% for url in url_instance %}
+            <div>
+                <div class="card" style="width: 45rem;">
+                    <div class="card-body">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>
+                                <h5 class="card-title">Title: <br> {{url.title}}</h5>
+                                <p class="card-text">{{url.long_url}}</p>
+                            </div>
+                            <div>
+                            <label style="margin-top: 2px; font-size: 15px;">Short Link</label>
+                            <br>
+                            <a href="http://127.0.0.1:80000/{{url.short_hash}}" target="blank" style="margin-left: 0px;">http://127.0.0.1:80000/{{url.short_hash}}</a>
+                            </div>
+                        <div>
+                            <label style = "margin-top: 1px;">clicks</label> 
+                            <br>
+                            <p>{{url.no_clicks}}</p>
+                        </div>
+                                
+                        </div>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+
+
 
     </div>
 
